@@ -8,10 +8,10 @@ var socket =io();
             text: 'Hey. this is arun'
         });*/
 
-        socket.emit('createMessage', {
+        /*socket.emit('createMessage', {
            to: 'aanand',
             text: 'hey from this side'
-        });
+        });*/
   	  });
 
 

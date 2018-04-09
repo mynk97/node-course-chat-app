@@ -21,18 +21,24 @@ app.use(express.static(publicPath));
    	createAt: 123
    });
 */  
-   socket.emit('newMessage', {
+   /*socket.emit('newMessage', {
       from: "mayank",
       text: "hey buddy",
       createAt: 123
    });
-
+*/
    /*socket.on('createEmail',(newEmail)=> {
       console.log('createEmail',newEmail);
    });*/
 
-   socket.on('createMessage', (newMessage)=> {
-       console.log('createMessage', newMessage);
+   socket.on('createMessage', (Message)=> {
+       console.log('createMessage', Message);
+
+       io.emit('newMessage', {
+          from:Message.from,
+          text: Message.text,
+          createdAt: new Date().getTime() 
+       });
    });
 
  	socket.on('disconnect',()=> {
