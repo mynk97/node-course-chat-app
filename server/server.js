@@ -31,14 +31,33 @@ app.use(express.static(publicPath));
       console.log('createEmail',newEmail);
    });*/
 
+    socket.emit('newMessage',{
+        from: 'admin',
+        text: 'Welcome to chat app',
+        createAt: new Date().getTime() 
+      });
+
+    socket.broadcast.emit('newMessage',{
+         from: 'admin',
+         text: 'new user joined',
+         createAt:new Date().getTime() 
+    });
+
    socket.on('createMessage', (Message)=> {
        console.log('createMessage', Message);
+
+
 
        io.emit('newMessage', {
           from:Message.from,
           text: Message.text,
           createdAt: new Date().getTime() 
        });
+       /*socket.broadcast.emit('newMessage',{
+          from:Message.from,
+          text: Message.text,
+          createdAt: new Date().getTime() 
+       });*/
    });
 
  	socket.on('disconnect',()=> {
